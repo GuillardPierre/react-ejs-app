@@ -1,10 +1,19 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { getAll, getById, create, updateById, deleteById } from "./store.js";
 const app = express();
+app.use(express.static("public"));
 app.use(bodyParser.json());
+app.set("view engine", "ejs");
 
-app.get("api/v1/whipser", (req, res) => {
-  res.json([]);
+app.get("/about", async (req, res) => {
+  const whispers = await getAll();
+  res.render("about", { whispers });
+});
+
+app.get("api/v1/whipser", async (req, res) => {
+  const whispers = await getAll();
+  res.json(whispers);
 });
 
 app.get("api/v1/whipser/:id", (req, res) => {
