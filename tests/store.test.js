@@ -15,6 +15,7 @@ const existingId = fixtures[0].id;
 describe("store", () => {
   beforeEach(() => populateDb(fixtures));
   afterAll(restoreDb);
+
   describe("getAll", () => {
     it("Should return an empty array when there's no data", async () => {
       restoreDb();
@@ -26,6 +27,7 @@ describe("store", () => {
       expect(data).toEqual(fixtures);
     });
   });
+
   describe("getById", () => {
     it("Should return undefined when there's no item with the given id", async () => {
       const item = await getById(inventedId);
@@ -36,6 +38,7 @@ describe("store", () => {
       expect(item).toEqual(fixtures[0]);
     });
   });
+
   describe("create", () => {
     it("Should return the created item", async () => {
       const newItem = { id: fixtures.length + 1, message: "test 3" };
@@ -49,6 +52,7 @@ describe("store", () => {
       expect(item).toEqual(newItem);
     });
   });
+
   describe("updateById", () => {
     it("Should return undefined when there is no item with the given id", async () => {
       const item = await updateById(inventedId);
@@ -66,6 +70,7 @@ describe("store", () => {
       expect(item).toEqual(updatedItem);
     });
   });
+
   describe("deleteById", () => {
     it("Should return undefined when there is no item with the given id", async () => {
       const item = await deleteById(inventedId);
